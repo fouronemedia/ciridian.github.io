@@ -1,0 +1,16 @@
+# Node modules and build files
+node_modules/
+.next/
+.DS_Store
+
+# Local environment variables
+.env*
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Output folders
+.out/
+node_modules
