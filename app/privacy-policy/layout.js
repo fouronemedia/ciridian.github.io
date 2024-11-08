@@ -1,6 +1,7 @@
 import Image from "next/image"
 import logoBlack from "../../public/images/ciridian-logo-black.svg"
 import Link from "next/link"
+import { Inter } from "@next/font/google"
 
 export const metadata = {
   title: "Ciridian.com - Privacy Policy",
