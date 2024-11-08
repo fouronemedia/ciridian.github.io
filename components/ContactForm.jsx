@@ -17,7 +17,7 @@ function ContactForm() {
 
     emailjs
       .sendForm("service_ciridian", "template_k0te5ov", form.current, {
-        publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
+        publicKey: "IAXOenKrF725KavyY",
         from_name: e.target.user_name.value,
         to_name: "Katie @ Ciridian",
         message: e.target.user_email.value + " has requested to be contacted.",
