@@ -23,9 +23,15 @@ function ContactForm() {
         message: e.target.user_email.value + " has requested to be contacted.",
         reply_to: e.target.user_email.value
       })
-      .then(() => {
-        setSuccess(true)
-      })
+      .then(
+        () => {
+          console.log("Success")
+          setSuccess(true)
+        },
+        error => {
+          console.log("FAILED...", error)
+        }
+      )
   }
 
   return (
