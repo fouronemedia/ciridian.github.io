@@ -16,8 +16,8 @@ function ContactForm() {
     e.preventDefault()
 
     emailjs
-      .sendForm(process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID.toString(), process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID.toString(), form.current, {
-        publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY.toString(),
+      .sendForm(process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID, process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID, form.current, {
+        publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
         from_name: e.target.user_name.value,
         to_name: "Katie @ Ciridian",
         message: e.target.user_email.value + " has requested to be contacted.",
