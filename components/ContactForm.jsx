@@ -1,17 +1,23 @@
 "use client"
 import React, { useRef, useState } from "react"
 import emailjs from "@emailjs/browser"
+import { useSpring, animated } from "@react-spring/web"
 
 function ContactForm() {
   const [success, setSuccess] = useState(false)
   const form = useRef()
 
+  const springs = useSpring({
+    from: { opacity: 0 },
+    to: { opacity: 1 }
+  })
+
   const sendEmail = e => {
     e.preventDefault()
 
     emailjs
-      .sendForm(process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID, process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID, form.current, {
-        publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
+      .sendForm(process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID.toString(), process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID.toString(), form.current, {
+        publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY.toString(),
         from_name: e.target.user_name.value,
         to_name: "Katie @ Ciridian",
         message: e.target.user_email.value + " has requested to be contacted.",
@@ -44,9 +50,11 @@ function ContactForm() {
         </button>
       </form>
 
-      <div className={`contact-success bg-dark text-white text-center d-flex justify-content-center align-items-center p-5 mb-3  + ${success ? "d-block" : "d-none"}`}>
-        <h3>Thank You for contacting us. Someone will respond to you soon.</h3>
-      </div>
+      <animated.div style={{ opacity: 0, ...springs }}>
+        <div className={`contact-success bg-dark text-white text-center d-flex justify-content-center align-items-center p-5 mb-3  + ${success ? "d-block" : "d-none"}`}>
+          <h3>Thank You for contacting us. Someone will respond to you soon.</h3>
+        </div>
+      </animated.div>
     </>
   )
 }
