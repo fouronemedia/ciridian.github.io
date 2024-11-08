@@ -16,7 +16,7 @@ function ContactForm() {
     e.preventDefault()
 
     emailjs
-      .sendForm(process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID, process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID, form.current, {
+      .sendForm("service_ciridian", "template_k0te5ov", form.current, {
         publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
         from_name: e.target.user_name.value,
         to_name: "Katie @ Ciridian",
