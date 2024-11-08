@@ -1,9 +1,16 @@
 "use client"
-import React, { useRef } from "react"
+import React, { useRef, useState } from "react"
 import emailjs from "@emailjs/browser"
+import { useSpring, animated } from "@react-spring/web"
 
 function ContactForm() {
+  const [success, setSuccess] = useState(false)
   const form = useRef()
+
+  const springs = useSpring({
+    from: { opacity: 0 },
+    to: { opacity: 1 }
+  })
 
   const sendEmail = e => {
     e.preventDefault()
@@ -16,19 +23,14 @@ function ContactForm() {
         message: e.target.user_email.value + " has requested to be contacted.",
         reply_to: e.target.user_email.value
       })
-      .then(
-        () => {
-          console.log("Success")
-        },
-        error => {
-          console.log("FAILED...", error)
-        }
-      )
+      .then(() => {
+        setSuccess(true)
+      })
   }
 
   return (
     <>
-      <form className="text-center" ref={form} onSubmit={sendEmail}>
+      <form className={"text-center " + (success ? "d-none" : "")} ref={form} onSubmit={sendEmail}>
         <div className="form-floating mb-3">
           <input type="text" id="name" name="user_name" className="form-control bg-dark border-0 text-white" placeholder="John Smith" required />
           <label htmlFor="name">First Name</label>
@@ -41,6 +43,12 @@ function ContactForm() {
           Submit
         </button>
       </form>
+
+      <animated.div style={{ opacity: 0, ...springs }}>
+        <div className={`contact-success bg-dark text-white text-center d-flex justify-content-center align-items-center p-5 mb-3  + ${success ? "d-block" : "d-none"}`}>
+          <h3>Thank You for contacting us. Someone will respond to you soon.</h3>
+        </div>
+      </animated.div>
     </>
   )
 }
